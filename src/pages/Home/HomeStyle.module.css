@@ -1,0 +1,36 @@
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.searchForm {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input {
+  padding: 8px;
+  width: 60%;
+  max-width: 400px;
+}
+
+.button {
+  padding: 8px 12px;
+  margin-left: 10px;
+}
+
+.backButton {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.loading,
+.error {
+  text-align: center;
+}
+
+.error {
+  color: red;
+}
+
