@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import MovieCard from "./components/MovieCard";
-import Pagination from "./components/Pagination";
+import MovieCard from "./components/MovieCard/MovieCardIndex";
+import Pagination from "./components/Pagination/PaginationIndex";
+import styles from "./App.module.css";
 
 const API_KEY = "c05da5b14c74c22897e7ea13622e01aa";
 
@@ -70,33 +71,32 @@ function App() {
 
   // Renderizado
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Películas en Cartelera 🎬</h1>
 
       {/* Formulario de búsqueda */}
-      <form onSubmit={handleSearch} style={{ marginBottom: "20px", textAlign: "center" }}>
+      <form onSubmit={handleSearch} className={styles.searchForm}>
         <input
           type="text"
           placeholder="Buscar película..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          style={{ padding: "8px", width: "60%", maxWidth: "400px" }}
+          className={styles.input}
         />
-        <button type="submit" style={{ padding: "8px 12px", marginLeft: "10px" }}>
+        <button type="submit" className={styles.button}>
           Buscar
         </button>
       </form>
 
-      {/* Botón para volver al listado original */}
       {isSearching && (
-        <div style={{ textAlign: "center", marginBottom: "10px" }}>
+        <div className={styles.backButton}>
           <button onClick={resetSearch}>Volver a cartelera</button>
         </div>
       )}
 
-      {/* Mensajes de carga o error */}
-      {loading && <p style={{ textAlign: "center" }}>Cargando películas...</p>}
-      {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+      {loading && <p className={styles.loading}>Cargando películas...</p>}
+      {error && <p className={styles.error}>{error}</p>}
+
 
       {/* Listado de películas */}
       {movies.map((movie) => (
