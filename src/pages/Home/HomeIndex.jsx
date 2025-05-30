@@ -1,0 +1,111 @@
+// src/pages/Home.jsx
+import { useEffect, useState } from "react";
+import MovieCard from "../../components/MovieCard/MovieCardIndex";
+import Pagination from "../../components/Pagination/PaginationIndex";
+import styles from "./HomeStyle.module.css";
+
+const API_KEY = "c05da5b14c74c22897e7ea13622e01aa";
+
+function Home() {
+  const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+
+  const resetSearch = () => {
+    setSearchTerm("");
+    setIsSearching(false);
+    setPage(1);
+  };
+
+  useEffect(() => {
+    if (isSearching) return;
+
+    setLoading(true);
+    setError(null);
+
+    fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=${API_KEY}&language=es-MX&page=${page}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al cargar las películas");
+        return res.json();
+      })
+      .then((data) => {
+        setMovies(data.results);
+        setTotalPages(data.total_pages);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, [page, isSearching]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim() === "") return;
+
+    setIsSearching(true);
+    setLoading(true);
+    setError(null);
+
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=es-MX&query=${encodeURIComponent(searchTerm)}`)
+      .then((res) => {
+        if (!res.ok) throw new Error("Error al buscar películas");
+        return res.json();
+      })
+      .then((data) => {
+        setMovies(data.results);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoading(false);
+      });
+  };
+
+  return (
+    <div className={styles.container}>
+      <h1>Películas en Cartelera 🎬</h1>
+
+      <form onSubmit={handleSearch} className={styles.searchForm}>
+        <input
+          type="text"
+          placeholder="Buscar película..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.input}
+        />
+        <button type="submit" className={styles.button}>
+          Buscar
+        </button>
+      </form>
+
+      {isSearching && (
+        <div className={styles.backButton}>
+          <button onClick={resetSearch}>Volver a cartelera</button>
+        </div>
+      )}
+
+      {loading && <p className={styles.loading}>Cargando películas...</p>}
+      {error && <p className={styles.error}>{error}</p>}
+
+      {movies.map((movie) => (
+        <MovieCard key={movie.id} movie={movie} />
+      ))}
+
+      {!isSearching && (
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          onPrev={() => setPage((p) => Math.max(p - 1, 1))}
+          onNext={() => setPage((p) => Math.min(p + 1, totalPages))}
+        />
+      )}
+    </div>
+  );
+}
+
+export default Home;
