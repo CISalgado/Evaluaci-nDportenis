@@ -4,7 +4,7 @@ import MovieCard from "../../components/MovieCard/MovieCardIndex";
 import Pagination from "../../components/Pagination/PaginationIndex";
 import styles from "./HomeStyle.module.css";
 
-const API_KEY = "c05da5b14c74c22897e7ea13622e01aa";
+const API_KEY = import.meta.env.VITE_MOVIE_API_KEY;
 
 function Home() {
   const [movies, setMovies] = useState([]);
