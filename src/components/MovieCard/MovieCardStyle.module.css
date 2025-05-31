@@ -11,4 +11,13 @@
   max-width: 100%;
   height: auto;
   border-radius: 4px;
+  align-items: center;
+}
+
+.center{
+  text-align: center;
+}
+
+.description {
+  text-align: justify;
 }
