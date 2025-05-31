@@ -34,3 +34,8 @@
   color: red;
 }
 
+.movieLink{ 
+  text-decoration: "none";
+  color: "inherit" 
+}
+

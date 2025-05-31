@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import styles from "./MovieDetailStyle.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const API_KEY = "c05da5b14c74c22897e7ea13622e01aa";
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
@@ -9,6 +10,9 @@ function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [error, setError] = useState(null);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const fromPage = location.state?.fromPage || 1;
 
   useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=es-MX`)
@@ -25,7 +29,12 @@ function MovieDetail() {
 
   return (
     <div className={styles.container}>
-      <Link to="/" className={styles.backButton}>⬅ Volver</Link>
+      <button 
+        onClick={() => navigate("/", { state: { fromPage } })}
+        className={styles.backButton}
+      >
+        ⬅ Volver
+      </button>
 
       <div className={styles.hoverWrapper}>
         <div className={styles.detailWrapper}>

@@ -1,5 +1,5 @@
-// src/pages/Home.jsx
 import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import MovieCard from "../../components/MovieCard/MovieCardIndex";
 import Pagination from "../../components/Pagination/PaginationIndex";
 import styles from "./HomeStyle.module.css";
@@ -14,13 +14,26 @@ function Home() {
   const [totalPages, setTotalPages] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [isSearching, setIsSearching] = useState(false);
+  const location = useLocation();
 
-  const resetSearch = () => {
-    setSearchTerm("");
-    setIsSearching(false);
-    setPage(1);
-  };
+  // Cargar página desde location.state o sessionStorage
+  useEffect(() => {
+    const storedPage = sessionStorage.getItem("lastPage");
+    const fromPage = location.state?.fromPage;
 
+    if (fromPage && Number(fromPage) !== page) {
+      setPage(Number(fromPage));
+    } else if (storedPage && Number(storedPage) !== page) {
+      setPage(Number(storedPage));
+    }
+  }, [location.state]);
+
+  // Guardar página actual
+  useEffect(() => {
+    sessionStorage.setItem("lastPage", page);
+  }, [page]);
+
+  // Cargar películas (solo si no está buscando)
   useEffect(() => {
     if (isSearching) return;
 
@@ -43,6 +56,7 @@ function Home() {
       });
   }, [page, isSearching]);
 
+  // Buscar películas
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchTerm.trim() === "") return;
@@ -66,10 +80,17 @@ function Home() {
       });
   };
 
+  const resetSearch = () => {
+    setSearchTerm("");
+    setIsSearching(false);
+    setPage(1);
+  };
+
   return (
     <div className={styles.container}>
       <h1>Películas en Cartelera 🎬</h1>
 
+      {/* Búsqueda */}
       <form onSubmit={handleSearch} className={styles.searchForm}>
         <input
           type="text"
@@ -78,9 +99,7 @@ function Home() {
           onChange={(e) => setSearchTerm(e.target.value)}
           className={styles.input}
         />
-        <button type="submit" className={styles.button}>
-          Buscar
-        </button>
+        <button type="submit" className={styles.button}>Buscar</button>
       </form>
 
       {isSearching && (
@@ -89,13 +108,24 @@ function Home() {
         </div>
       )}
 
+      {/* Mensajes */}
       {loading && <p className={styles.loading}>Cargando películas...</p>}
       {error && <p className={styles.error}>{error}</p>}
 
+      {/* Lista de películas */}
       {movies.map((movie) => (
-        <MovieCard key={movie.id} movie={movie} />
+        <Link
+          key={movie.id}
+          to={`/movie/${movie.id}`}
+          state={{ fromPage: page }}
+          className={styles.movieLink}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          <MovieCard movie={movie} />
+        </Link>
       ))}
 
+      {/* Paginación */}
       {!isSearching && (
         <Pagination
           page={page}
