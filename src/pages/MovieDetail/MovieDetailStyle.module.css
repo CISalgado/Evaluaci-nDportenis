@@ -1,0 +1,61 @@
+.container {
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.backButton {
+  display: inline-block;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.backButton:hover {
+  background-color: #0056b3;
+}
+
+.hoverWrapper{
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #0056b3;
+  border-radius: 8px;
+}
+
+.detailWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.img {
+  width: 300px;
+  border-radius: 10px;
+}
+
+.info {
+  flex: 1;
+  min-width: 250px;
+}
+
+.overview {
+  margin-top: 10px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.loading {
+  text-align: center;
+}
