@@ -26,15 +26,6 @@ Una aplicación web construida con **React** que consume la API de [The Movie Da
 
 1. **Clona el repositorio:**
 
-   ```bash
-   git clone https://github.com/tu-usuario/nombre-repo.git
-   cd nombre-repo
-   ```
-
-## 🛠️ Instalación
-
-1. **Clona el repositorio:**
-
    git clone https://github.com/CISalgado/Evaluaci-nDportenis.git
    cd Evaluaci-nDportenis
 
