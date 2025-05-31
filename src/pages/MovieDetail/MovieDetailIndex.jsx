@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import styles from "./MovieDetailStyle.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const API_KEY = "c05da5b14c74c22897e7ea13622e01aa";
+const API_KEY = import.meta.env.VITE_MOVIE_API_KEY;
 const IMG_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
 function MovieDetail() {
