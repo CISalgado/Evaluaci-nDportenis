@@ -1,12 +1,47 @@
-# React + Vite
+# 🎬 Películas en Cartelera
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación web construida con **React** que consume la API de [The Movie Database (TMDb)](https://www.themoviedb.org/) para mostrar películas actualmente en cartelera. Incluye búsqueda por nombre, navegación por páginas y una vista detallada de cada película.
 
-Currently, two official plugins are available:
+## 📋 Requisitos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Node.js** versión `22.16.0` o compatible
+- **npm** versión `10.9.2` o compatible
 
-## Expanding the ESLint configuration
+## 🚀 Características
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔍 Búsqueda de películas por nombre.
+- 📄 Paginación con persistencia de la última página visitada.
+- 🎥 Vista detallada de cada película con información como título, fecha de estreno, géneros y sinopsis.
+- 💅 Diseño responsivo usando CSS Modules.
+- ⚠️ Manejo de errores y estados de carga.
+
+## 🧩 Tecnologías utilizadas
+
+- [React](https://reactjs.org/)
+- [React Router](https://reactrouter.com/)
+- [CSS Modules](https://github.com/css-modules/css-modules)
+- [TMDb API](https://developer.themoviedb.org/)
+
+## ⚙️ Instalación y ejecución
+
+1. **Clona el repositorio:**
+
+   ```bash
+   git clone https://github.com/tu-usuario/nombre-repo.git
+   cd nombre-repo
+   ```
+
+## 🛠️ Instalación
+
+1. **Clona el repositorio:**
+
+   git clone https://github.com/CISalgado/Evaluaci-nDportenis.git
+   cd Evaluaci-nDportenis
+
+2. **Instala las dependencias:**
+
+   npm install
+
+3. **Ejecuta la aplicación en modo desarrollo:**
+
+   npm start
