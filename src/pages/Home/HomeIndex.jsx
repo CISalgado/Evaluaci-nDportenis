@@ -119,7 +119,6 @@ function Home() {
           to={`/movie/${movie.id}`}
           state={{ fromPage: page }}
           className={styles.movieLink}
-          style={{ textDecoration: "none", color: "inherit" }}
         >
           <MovieCard movie={movie} />
         </Link>
